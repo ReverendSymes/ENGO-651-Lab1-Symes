@@ -1,4 +1,6 @@
 import os
+import re
+
 
 from flask import Flask, session
 from flask_session import Session
@@ -17,7 +19,11 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(uri)#os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 
