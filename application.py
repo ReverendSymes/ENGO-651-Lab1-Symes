@@ -40,3 +40,8 @@ def registration():
 @app.route("/bookspage")
 def bookspage():
     return render_template("bookspage.html")
+
+#book page will be general for all books
+@app.route("/search")
+def search():
+    return render_template("search.html")
