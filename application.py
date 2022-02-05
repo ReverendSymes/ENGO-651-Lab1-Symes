@@ -31,3 +31,12 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/registration")
+def registration():
+    return render_template("registration.html")
+
+#book page will be general for all books
+@app.route("/bookspage")
+def bookspage():
+    return render_template("bookspage.html")
