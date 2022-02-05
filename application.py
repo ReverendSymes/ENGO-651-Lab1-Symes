@@ -27,11 +27,13 @@ if uri and uri.startswith("postgres://"):
 engine = create_engine(uri)#os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-
+#Index html
 @app.route("/")
 def index():
+    #Search here
     return render_template("index.html")
 
+#Link to registration
 @app.route("/registration")
 def registration():
     return render_template("registration.html")
@@ -41,7 +43,7 @@ def registration():
 def bookspage():
     return render_template("bookspage.html")
 
-#book page will be general for all books
+#search page for displaying the search results
 @app.route("/search")
 def search():
     return render_template("search.html")
