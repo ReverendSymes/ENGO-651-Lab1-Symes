@@ -27,10 +27,13 @@ if uri and uri.startswith("postgres://"):
 engine = create_engine(uri)#os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+#Login stuff
+
 #Index html
 @app.route("/")
 def index():
     #Search here
+    #Login here
     return render_template("index.html")
 
 #Link to registration
