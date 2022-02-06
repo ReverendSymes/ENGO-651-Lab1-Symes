@@ -3,7 +3,7 @@ import re
 
 
 from flask import Flask, session
-from flask import render_template
+from flask import render_template, request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -47,6 +47,9 @@ def bookspage():
     return render_template("bookspage.html")
 
 #search page for displaying the search results
-@app.route("/search")
-def search():
+@app.route("/searchs", methods = ["POST"])
+def searchs():
+    #username = request.form.get(username)
+    #password = request.form.get(password)
+
     return render_template("search.html")
