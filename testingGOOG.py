@@ -17,6 +17,9 @@ bookinfo = res.json()
 #
 # print(id)
 
+boop = res.json()
+boop["items"][0]["volumeInfo"]["ratingsCount"]
+
 bookinfo = (bookinfo["items"][0])
 # title = (bookinfo["volumeInfo"]["title"])
 # authors = (bookinfo["volumeInfo"]["authors"])

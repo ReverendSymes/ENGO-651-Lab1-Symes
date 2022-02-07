@@ -48,7 +48,7 @@ def index():
         newpassword = request.form.get("newpassword")
         #NewUser = User(username = newusername,password = newpassword)
         db.execute("INSERT INTO users (username, password) VALUES (:username,:password)", {"username": newusername, "password": newpassword})
-        #db.session.add(NewUser)
+        db.commit()
         return render_template("index.html")
 
     if request.method == "GET":
