@@ -77,9 +77,23 @@ def search():
 
     return render_template("search.html",username=username, password = password)
 
+@app.route("/searchresults", methods = ["POST"])
+def searchresults():
+    searchword = request.form.get("searchword")
+    res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": searchword, "maxResults": 40,"projection": "lite"})
+    bookinfo = res.json()
+
+    results = []
+    for i in range(0,len(bookinfo["items"])-1):
+        tempbook = bookinfo["items"][i]["volumeInfo"]["title"]#,bookinfo["items"][i]["volumeInfo"]["authors"]]
+        results.append(tempbook)
+
+
+    #return results[0] #bookinfo["items"][0]["volumeInfo"]["title"]
+    return render_template("searchresults.html",results = results)
+
 @app.route("/api/<string:isbn>")
 def api(isbn):
-
     res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{isbn}"})
     bookinfo = res.json()
     bookinfo = (bookinfo["items"][0])

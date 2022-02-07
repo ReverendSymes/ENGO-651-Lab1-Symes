@@ -6,10 +6,24 @@ body {
   color: brown;
 }
 </style>
-<title>Registration Page</title>
+<title>Search Page</title>
 </head>
 <body>
-  <p><b>Please Register below</b></p>
-  <p><b>Hi {{username}} with {{password}}</b></p>
+  <p><b>please put in information for the book you would like</b></p>
+  <p><b>Hi {{username}}</b></p>
+Enter in search criteria
+  <form action = "{{ url_for('searchresults') }}" method= "post">
+    <input type="text" name = "searchword" placeholder="searchword">
+    <button>Search</button>
+  </form>
 
+  <form action = "{{ url_for('searchresults') }}" method= "post">
+    <input type="text" name = "searchword" placeholder="searchword">
+    <button>Search</button>
+  </form>
+
+  <form action = "{{ url_for('searchresults') }}" method= "post">
+    <input type="text" name = "searchword" placeholder="searchword">
+    <button>Search</button>
+  </form>
 </body>
