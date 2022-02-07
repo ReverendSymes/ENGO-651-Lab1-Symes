@@ -83,10 +83,12 @@ def bookspage():
     if reviewCount < 3:
         vibe = "is why we do not trust reviews"
     averageRating = (bookinfo["volumeInfo"]["averageRating"])
+    pics = bookinfo["volumeInfo"]["imageLinks"]["thumbnail"]
 
 
 
-    return render_template("bookspage.html",title = title, authors = authors, publishedDate = publishedDate,reviewCount = reviewCount,averageRating = averageRating,vibe=vibe)
+
+    return render_template("bookspage.html",title = title, authors = authors, publishedDate = publishedDate,reviewCount = reviewCount,averageRating = averageRating,vibe=vibe,ISBN_10=ISBN_10,pics = pics)
 
 
 #search page for displaying the search results
