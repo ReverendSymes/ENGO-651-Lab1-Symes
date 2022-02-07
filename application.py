@@ -8,6 +8,8 @@ from flask import request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from models import *
+
 
 app = Flask(__name__)
 
@@ -21,13 +23,16 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-uri = os.getenv("DATABASE_URL")  # or other relevant config var
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+with app.app_context():
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    if uri and uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(uri)#os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+#with app.app_context():
+#    db.create_all()
 #Login stuff
 
 #Index html
@@ -39,8 +44,10 @@ def index():
         #SQL ADD IT
         newusername = request.form.get("newusername")
         newpassword = request.form.get("newpassword")
-        db.execute("INSERT INTO userinfo (UserName, Password) VALUES (newusername,newpassword)")
-        return newusername
+        #NewUser = User(username = newusername,password = newpassword)
+        db.execute("INSERT INTO users (username, password) VALUES (:username,:password)", {"username": newusername, "password": newpassword})
+        #db.session.add(NewUser)
+        return render_template("index.html")
 
     if request.method == "GET":
         return render_template("index.html")
@@ -66,4 +73,4 @@ def search():
     username = request.form.get("username")
     password = request.form.get("password")
 
-    return render_template("search.html",username=username)
+    return render_template("search.html",username=username, password = password)
