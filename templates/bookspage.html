@@ -29,6 +29,23 @@ body {
   <p>The ISBN is {{ISBN_10}}</p>
   <p>List of reviews</p>
 
+  <form action = "{{ url_for('reviewsubmitted') }}" method= "post">
+    <input style = "height:150px" type="text" name = "reviewtext" placeholder="Leave a review">
+<br>
+    <input type="radio" id="g5" name="goosenumber" value=5>
+      <label for="g5">5 Gooses out of 5</label><br>
+      <input type="radio" id="g4" name="goosenumber" value=4>
+      <label for="g4">4 Gooses out of 5</label><br>
+      <input type="radio" id="g3" name="goosenumber" value=3>
+      <label for="g3">3 Gooses out of 5</label><br>
+      <input type="radio" id="g2" name="goosenumber" value=2>
+      <label for="g2">2 Gooses out of 5</label><br>
+      <input type="radio" id="g1" name="goosenumber" value=1>
+      <label for="g1">1 Gooses out of 5</label><br>
+
+    <button>Submit Review</button>
+  </form>
+
 
 
 </body>

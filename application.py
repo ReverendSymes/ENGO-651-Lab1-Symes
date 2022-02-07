@@ -55,9 +55,6 @@ def index():
         return render_template("index.html")
 
 
-    #return render_template("index.html")
-
-
 #Link to registration
 @app.route("/registration")
 def registration():
@@ -66,6 +63,7 @@ def registration():
 #book page will be general for all books
 @app.route("/bookspage", methods = ["POST"])
 def bookspage():
+    global searchpick
     searchpick = request.form.get("searchpick")
     searchpick = id[int(searchpick) - 1]
 
@@ -85,9 +83,6 @@ def bookspage():
     averageRating = (bookinfo["volumeInfo"]["averageRating"])
     pics = bookinfo["volumeInfo"]["imageLinks"]["thumbnail"]
 
-
-
-
     return render_template("bookspage.html",title = title, authors = authors, publishedDate = publishedDate,reviewCount = reviewCount,averageRating = averageRating,vibe=vibe,ISBN_10=ISBN_10,pics = pics)
 
 
@@ -99,6 +94,7 @@ def search():
     ressy = db.execute("SELECT password FROM users").fetchone()
 
     return render_template("search.html",username=username, password = password,ressy=ressy)
+
 
 @app.route("/searchresults", methods = ["POST"])
 def searchresults():
@@ -117,6 +113,8 @@ def searchresults():
     #return results[0] #bookinfo["items"][0]["volumeInfo"]["title"]
     return render_template("searchresults.html",results = results)
 
+
+
 @app.route("/api/<string:isbn>")
 def api(isbn):
     res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{isbn}"})
@@ -134,3 +132,12 @@ def api(isbn):
 
     return(json.dumps(infor))
     #return isbn
+
+@app.route("/reviewsubmitted", methods = ["POST"])
+def reviewsubmitted():
+    reviewtext = request.form.get("reviewtext")
+    goosenumber = request.form.get("goosenumber")
+    bookid = searchid
+    db.execute("INSERT INTO gbreviews (bookid, review, username,rating) VALUES (:bookid,:reviewtext,:username,:goosenumber)", {"bookid": bookid, "reviewtext": reviewtext, "username" : username,"goosenumber": goosenumber})
+    db.commit()
+    return render_template("success.html")
