@@ -9,17 +9,20 @@
   <h1>Welcome to the book reviewing Goose Reads</h1>
   <p>please log in below</p>
   <p>login here</p>
-  <form action = "{{url_for('searchs')}}" method = "post">
-    <input type="text" username = "username" placeholder="Enter your username">
+  <form action = "{{ url_for('search') }}" method= "post">
+    <input type="text" name = "username" placeholder="Enter your username">
     <input type="password" password = "password" placeholder="Enter your password">
     <button>Enter Information</button>
+  </form>
 
 
   <h4>login here</h4>
   <br>
   <br>
   <p>New Member?</p>
-  <p>New Member button</p>
+  <form action="{{ url_for('registration') }}">
+    <input type="submit" value="Register Here" />
+</form>
 
 
 
