@@ -31,11 +31,23 @@ db = scoped_session(sessionmaker(bind=engine))
 #Login stuff
 
 #Index html
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def index():
     #Search here
     #Login here
-    return render_template("index.html")
+    if request.method == "POST":
+        #SQL ADD IT
+        newusername = request.form.get("newusername")
+        newpassword = request.form.get("newpassword")
+        db.execute("INSERT INTO userinfo (UserName, Password) VALUES (newusername,newpassword)")
+        return newusername
+
+    if request.method == "GET":
+        return render_template("index.html")
+
+
+    #return render_template("index.html")
+
 
 #Link to registration
 @app.route("/registration")
@@ -46,6 +58,7 @@ def registration():
 @app.route("/bookspage")
 def bookspage():
     return render_template("bookspage.html")
+
 
 #search page for displaying the search results
 @app.route("/search", methods = ["POST"])
