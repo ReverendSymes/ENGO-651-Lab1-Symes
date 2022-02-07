@@ -77,9 +77,10 @@ def search():
 
     return render_template("search.html",username=username, password = password)
 
-@app.route("/api/<str:ISBN>")
-def api():
-    res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": "isbn:{{ISBN}}"})
+@app.route("/api/<string:isbn>")
+def api(isbn):
+
+    res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{isbn}"})
     bookinfo = res.json()
     bookinfo = (bookinfo["items"][0])
     title = (bookinfo["volumeInfo"]["title"])
@@ -93,3 +94,4 @@ def api():
     infor = {"title": title, "authors": authors, "publishedDate": publishedDate, "ISBN_10": ISBN_10, "ISBN_13": ISBN_13,"reviewCount": reviewCount,"averageRating": averageRating}
 
     return(json.dumps(infor))
+    #return isbn

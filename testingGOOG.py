@@ -12,10 +12,6 @@ ISBN_13 = (bookinfo["volumeInfo"]["industryIdentifiers"][1]["identifier"])
 reviewCount = (bookinfo["volumeInfo"]["ratingsCount"])
 averageRating = (bookinfo["volumeInfo"]["averageRating"])
 
-print(averageRating)
-
-
-
 infor = {"title": title, "authors": authors, "publishedDate": publishedDate, "ISBN_10": ISBN_10, "ISBN_13": ISBN_13,"reviewCount": reviewCount,"averageRating": averageRating}
 
 print(json.dumps(infor))
