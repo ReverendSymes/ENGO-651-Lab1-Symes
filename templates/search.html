@@ -4,6 +4,7 @@
 body {
   background-color: tan;
   color: brown;
+  text-align: center;
 }
 </style>
 <title>Search Page</title>
@@ -11,19 +12,11 @@ body {
 <body>
   <p><b>please put in information for the book you would like</b></p>
   <p><b>Hi {{username}}</b></p>
-Enter in search criteria
+Enter in search criteria <br>
+Either Author, isbn, or title
   <form action = "{{ url_for('searchresults') }}" method= "post">
     <input type="text" name = "searchword" placeholder="searchword">
     <button>Search</button>
   </form>
 
-  <form action = "{{ url_for('searchresults') }}" method= "post">
-    <input type="text" name = "searchword" placeholder="searchword">
-    <button>Search</button>
-  </form>
-
-  <form action = "{{ url_for('searchresults') }}" method= "post">
-    <input type="text" name = "searchword" placeholder="searchword">
-    <button>Search</button>
-  </form>
 </body>
