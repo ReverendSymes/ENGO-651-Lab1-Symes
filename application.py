@@ -96,8 +96,9 @@ def bookspage():
 def search():
     username = request.form.get("username")
     password = request.form.get("password")
+    ressy = db.execute("SELECT password FROM users").fetchone()
 
-    return render_template("search.html",username=username, password = password)
+    return render_template("search.html",username=username, password = password,ressy=ressy)
 
 @app.route("/searchresults", methods = ["POST"])
 def searchresults():
