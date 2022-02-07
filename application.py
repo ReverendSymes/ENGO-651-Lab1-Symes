@@ -64,9 +64,11 @@ def registration():
     return render_template("registration.html")
 
 #book page will be general for all books
-@app.route("/bookspage")
+@app.route("/bookspage", methods = ["POST"])
 def bookspage():
-    return render_template("bookspage.html")
+    searchpick = request.form.get("searchpick")
+    searchpick = id[int(searchpick) - 1]
+    return searchpick#render_template("bookspage.html")
 
 
 #search page for displaying the search results
@@ -79,16 +81,18 @@ def search():
 
 @app.route("/searchresults", methods = ["POST"])
 def searchresults():
+    global id
     searchword = request.form.get("searchword")
     res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": searchword, "maxResults": 40,"projection": "lite"})
     bookinfo = res.json()
 
     results = []
+    id = []
     for i in range(0,len(bookinfo["items"])-1):
         tempbook = bookinfo["items"][i]["volumeInfo"]["title"]#,bookinfo["items"][i]["volumeInfo"]["authors"]]
+        tempid = bookinfo["items"][i]["id"]
         results.append(tempbook)
-
-
+        id.append(tempid)
     #return results[0] #bookinfo["items"][0]["volumeInfo"]["title"]
     return render_template("searchresults.html",results = results)
 

@@ -9,9 +9,24 @@ body {
 <title>Registration Page</title>
 </head>
 <body>
-  <p><b>please put in information for the book you would like</b></p>
-  <p><b>{{results[3]}} </b></p>
+  <p><b>Book Titles of search results</b></p>
+  <ol>
+  <li>{{results[1]}}</li>
+  <li>{{results[2]}}</li>
+  <li>{{results[3]}}</li>
+  <li>{{results[4]}}</li>
+  <li>{{results[5]}}</li>
+  <li>{{results[6]}}</li>
+  <li>{{results[7]}}</li>
+  <li>{{results[8]}}</li>
+  <li>{{results[9]}}</li>
+  <li>{{results[10]}}</li>
 
-
-  </form>
+</ol>
+<br>
+Enter the number of the result you are looking for <br>
+<form action = "{{ url_for('bookspage') }}" method= "post">
+  <input type="text" name = "searchpick" placeholder="Enter Number">
+  <button>Select book</button>
+</form>
 </body>

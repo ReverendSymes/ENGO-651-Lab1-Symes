@@ -1,17 +1,21 @@
 import requests
 import json
 
-res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": "rothfuss", "maxResults": 40,"projection": "lite"})
+res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": "awVXPQAACAAJ", "maxResults": 40,"projection": "lite"})
 bookinfo = res.json()
-print(bookinfo["items"][4]["volumeInfo"]["title"])
+print(bookinfo["items"][0]["volumeInfo"]["title"])
 print(len(bookinfo["items"]))
 results = []
+results = []
+id = []
 for i in range(0,len(bookinfo["items"])-1):
-    tempbook = bookinfo["items"][i]["volumeInfo"]["authors"][0]#,bookinfo["items"][i]["volumeInfo"]["authors"]]
-    print(tempbook)
+    tempbook = bookinfo["items"][i]["volumeInfo"]["title"]#,bookinfo["items"][i]["volumeInfo"]["authors"]]
+    tempid = bookinfo["items"][i]["id"]
     results.append(tempbook)
+    id.append(tempid)
 
-print(results)
+
+print(id)
 
 # bookinfo = (bookinfo["items"][0])
 # title = (bookinfo["volumeInfo"]["title"])
