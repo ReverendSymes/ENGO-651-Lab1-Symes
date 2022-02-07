@@ -68,7 +68,25 @@ def registration():
 def bookspage():
     searchpick = request.form.get("searchpick")
     searchpick = id[int(searchpick) - 1]
-    return searchpick#render_template("bookspage.html")
+
+    res = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": searchpick})
+    bookinfo = res.json()
+    bookinfo = (bookinfo["items"][0])
+    title = (bookinfo["volumeInfo"]["title"])
+    authors = (bookinfo["volumeInfo"]["authors"])
+    publishedDate = (bookinfo["volumeInfo"]["publishedDate"])
+    ISBN_10 = (bookinfo["volumeInfo"]["industryIdentifiers"][0]["identifier"])
+    ISBN_13 = (bookinfo["volumeInfo"]["industryIdentifiers"][1]["identifier"])
+    reviewCount = (bookinfo["volumeInfo"]["ratingsCount"])
+    if reviewCount >= 3:
+        vibe = "is a good book"
+    if reviewCount < 3:
+        vibe = "is why we do not trust reviews"
+    averageRating = (bookinfo["volumeInfo"]["averageRating"])
+
+
+
+    return render_template("bookspage.html",title = title, authors = authors, publishedDate = publishedDate,reviewCount = reviewCount,averageRating = averageRating,vibe=vibe)
 
 
 #search page for displaying the search results
