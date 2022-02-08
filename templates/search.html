@@ -6,9 +6,28 @@ body {
   color: brown;
   text-align: center;
 }
+.header {
+  padding: 2%;
+  text-align: center;
+  color: tan;
+  font-size: 20px;
+  background: brown;
+}
+
+.footer {
+  padding: 2%;
+  text-align: left;
+  color: tan;
+  font-size: 20px;
+  background: brown;
+}
 </style>
 <title>Search Page</title>
 </head>
+<div class="header">
+  <h1>Goose Reads</h1>
+  <p>Search away little goose</p>
+</div>
 <body>
   <p><b>please put in information for the book you would like</b></p>
   <p><b>Hi {{username}}</b></p>
@@ -21,3 +40,10 @@ Either Author, isbn, or title
   {{message}}
 
 </body>
+
+<div class="footer">
+  <p>Hope you enjoyed this information</p>
+  <form action="{{ url_for('logout') }}">
+    <button>logout</button>
+</form>
+</div>

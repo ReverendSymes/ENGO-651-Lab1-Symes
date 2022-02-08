@@ -4,10 +4,30 @@
 body {
   background-color: tan;
   color: brown;
+  text-align: center;
+}
+.header {
+  padding: 2%;
+  text-align: center;
+  color: tan;
+  font-size: 20px;
+  background: brown;
+}
+
+.footer {
+  padding: 2%;
+  text-align: left;
+  color: tan;
+  font-size: 20px;
+  background: brown;
 }
 </style>
 <title>Registration Page</title>
 </head>
+<div class="header">
+  <h1>Goose Reads</h1>
+  <p>Search results</p>
+</div>
 <body>
   <p><b>Book Titles of search results</b></p>
   <ol>
@@ -30,3 +50,9 @@ Enter the number of the result you are looking for <br>
   <button>Select book</button>
 </form>
 </body>
+<div class="footer">
+  <p>Hope you enjoyed this information</p>
+  <form action="{{ url_for('logout') }}">
+    <button>logout</button>
+</form>
+</div>
