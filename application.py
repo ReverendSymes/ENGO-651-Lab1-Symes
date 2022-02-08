@@ -46,18 +46,24 @@ def index():
         #SQL ADD IT
         newusername = request.form.get("newusername")
         newpassword = request.form.get("newpassword")
+        message = request.form.get("message")
+
+
         #NewUser = User(username = newusername,password = newpassword)
         db.execute("INSERT INTO users (username, password) VALUES (:username,:password)", {"username": newusername, "password": newpassword})
         db.commit()
-        return render_template("index.html")
+        return render_template("index.html",message = message)
 
     if request.method == "GET":
-        return render_template("index.html")
+        message = "please log in"
+        return render_template("index.html", message = message)
 
 
 #Link to registration
 @app.route("/registration")
 def registration():
+    global message
+    message = "Registration success"
     return render_template("registration.html")
 
 #book page will be general for all books
@@ -87,15 +93,26 @@ def bookspage():
 
 
 #search page for displaying the search results
-@app.route("/search", methods = ["POST"])
+@app.route("/search", methods = ["POST", "GET"])
 def search():
     global username
     username = request.form.get("username")
     password = request.form.get("password")
-    ressy = db.execute("SELECT password FROM users").fetchone()
+    ressy = db.execute("SELECT username FROM users").fetchall()
+    ressy2 = db.execute("SELECT password FROM users").fetchall()
+    oktogo = "False"
+    message = "login error please try again"
+    for i in range(0,len(ressy)-1):
+        if str(ressy[i][0]) == str(username):
+            for i in range(0,len(ressy2)-1):
+                if str(ressy2[i][0]) == str(username):
+                    oktogo = "True"
+    if oktogo == "True":
+        message = "log in success"
+        return render_template("search.html",username=username, password = password,ressy=ressy, message = message)
 
-    return render_template("search.html",username=username, password = password,ressy=ressy)
-
+    else:
+         return render_template("index.html", message = message )
 
 @app.route("/searchresults", methods = ["POST"])
 def searchresults():
@@ -143,3 +160,11 @@ def reviewsubmitted():
     db.execute("INSERT INTO gbreviews (bookid, review, username,rating) VALUES (:bookid,:reviewtext,:username,:goosenumber)", {"bookid": bookid, "reviewtext": reviewtext, "username" : username,"goosenumber": goosenumber})
     db.commit()
     return render_template("success.html")
+
+@app.route("/logout", methods = ["POST"])
+def logout():
+    global username
+    global message
+    username = None
+    message = "Logged out"
+    return render_template("index.html",message == message)
