@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <head>
+  <style>
+  body {
+    background-color: tan;
+    text-align: center;
+  }
+  .header {
+    padding: 2%;
+    text-align: center;
+    color: tan;
+    font-size: 20px;
+    background: brown;
+  }
 
-<link href="./genCSS.css" rel="stylesheet">
+  .footer {
+    padding: 2%;
+    text-align: left;
+    color: tan;
+    font-size: 20px;
+    background: brown;
+  }
+
+
+  </style>
+
 
 <title>Homepage</title>
 </head>
 <body>
-  <h1>Welcome to the book reviewing Goose Reads</h1>
+  <div class="header">
+    <h1>Goose Reads</h1>
+    <p>Landing and login page!</p>
+  </div>
   <p>please log in below</p>
   <p>{{message}}</p>
   <form action = "{{ url_for('search') }}" method= "post">
@@ -28,3 +53,6 @@
 
 
 </body>
+<div class="footer">
+  <p>Goose Reads<p>
+</div>
