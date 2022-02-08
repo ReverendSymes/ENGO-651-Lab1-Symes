@@ -7,6 +7,9 @@ UCID 30033743
 Description:
 This app is for Goose Reads, a goose themed book search and review site.
 
+DATABASE_URL was chosen to be postgres://dbhojpqylvtmam:1ef8451d4e6ee04c9bf89db8ddb7f1f945ed3b3f563bc5e40a1830266890b689@ec2-34-205-46-149.compute-1.amazonaws.com:5432/d1k84rulbefoe6
+
+
 
 File Table of Contents
 templates - folder containing all of the html pages.
