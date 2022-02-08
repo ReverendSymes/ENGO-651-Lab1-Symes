@@ -89,6 +89,7 @@ def bookspage():
 #search page for displaying the search results
 @app.route("/search", methods = ["POST"])
 def search():
+    global username
     username = request.form.get("username")
     password = request.form.get("password")
     ressy = db.execute("SELECT password FROM users").fetchone()
@@ -137,7 +138,8 @@ def api(isbn):
 def reviewsubmitted():
     reviewtext = request.form.get("reviewtext")
     goosenumber = request.form.get("goosenumber")
-    bookid = searchid
+    bookid = searchpick
+    #username = username
     db.execute("INSERT INTO gbreviews (bookid, review, username,rating) VALUES (:bookid,:reviewtext,:username,:goosenumber)", {"bookid": bookid, "reviewtext": reviewtext, "username" : username,"goosenumber": goosenumber})
     db.commit()
     return render_template("success.html")
