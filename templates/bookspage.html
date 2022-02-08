@@ -12,6 +12,16 @@ body {
   font-size: 20px;
   background: brown;
 }
+
+.footer {
+  padding: 2%;
+  text-align: left;
+  color: tan;
+  font-size: 20px;
+  background: brown;
+}
+
+
 </style>
 <title>BookPage</title>
 </head>
@@ -47,5 +57,10 @@ body {
   </form>
 
 
-
 </body>
+<div class="footer">
+  <p>Hope you enjoyed this information</p>
+  <form action="{{ url_for('logout') }}">
+    <button>logout</button>
+</form>
+</div>
